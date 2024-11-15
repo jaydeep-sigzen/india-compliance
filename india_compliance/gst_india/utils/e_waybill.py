@@ -1264,10 +1264,8 @@ class EWaybillData(GSTTransactionData):
         if not self.doc.gst_transporter_id:
             self.validate_mode_of_transport()
 
-<<<<<<< HEAD
         self.validate_non_gst_items()
-        self.validate_same_gstin()
-=======
+
         if is_outward_stock_entry(self.doc):
             self.validate_different_gstin()
         else:
@@ -1281,7 +1279,6 @@ class EWaybillData(GSTTransactionData):
                 ),
                 title=_("Invalid Data"),
             )
->>>>>>> 13be533e (fix: Extended E-Way Bill Support for Stock Entry (#2594))
 
     def validate_same_gstin(self):
         if self.doc.doctype == "Delivery Note":

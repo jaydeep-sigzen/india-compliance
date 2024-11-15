@@ -1660,16 +1660,11 @@ def before_print(doc, method=None, print_settings=None):
 
 
 def onload(doc, method=None):
-<<<<<<< HEAD
-
     if (
         ignore_gst_validations(doc, throw=False)
         or not doc.place_of_supply
         or not doc.company_gstin
     ):
-=======
-    if ignore_gst_validations(doc) or not doc.place_of_supply or not doc.company_gstin:
->>>>>>> 13be533e (fix: Extended E-Way Bill Support for Stock Entry (#2594))
         return
 
     set_ecommerce_supply_type(doc)

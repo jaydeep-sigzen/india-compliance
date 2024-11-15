@@ -22,9 +22,6 @@ from india_compliance.gst_india.overrides.transaction import (
     validate_mandatory_fields,
     validate_place_of_supply,
 )
-<<<<<<< HEAD
-from india_compliance.gst_india.utils import get_gst_accounts_by_type, is_api_enabled
-=======
 from india_compliance.gst_india.utils import (
     get_gst_accounts_by_type,
     is_api_enabled,
@@ -33,7 +30,6 @@ from india_compliance.gst_india.utils import (
 from india_compliance.gst_india.utils import (
     validate_invoice_number as validate_transaction_name,
 )
->>>>>>> 13be533e (fix: Extended E-Way Bill Support for Stock Entry (#2594))
 from india_compliance.gst_india.utils.e_waybill import get_e_waybill_info
 from india_compliance.gst_india.utils.taxes_controller import (
     CustomTaxController,
@@ -188,13 +184,8 @@ def validate(doc, method=None):
     if not is_e_waybill_applicable(doc):
         return
 
-<<<<<<< HEAD
-    if doc.doctype == "Stock Entry" and doc.purpose != "Send to Subcontractor":
-        return
-=======
     if doc.doctype in ("Stock Entry", "Subcontracting Receipt"):
         validate_transaction_name(doc)
->>>>>>> 13be533e (fix: Extended E-Way Bill Support for Stock Entry (#2594))
 
     field_map = (
         STOCK_ENTRY_FIELD_MAP
