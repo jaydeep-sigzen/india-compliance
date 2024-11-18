@@ -1,11 +1,7 @@
 import re
 
 import frappe
-<<<<<<< HEAD
-from frappe.tests.utils import FrappeTestCase
-=======
-from frappe.tests import IntegrationTestCase, change_settings
->>>>>>> 9569a5e4 (test: validate when gstin field is empty)
+from frappe.tests.utils import FrappeTestCase, change_settings
 from erpnext.controllers.subcontracting_controller import (
     get_materials_from_supplier,
     make_rm_stock_entry,
@@ -160,10 +156,7 @@ def make_stock_transfer_entry(**args):
     return doc.submit()
 
 
-<<<<<<< HEAD
 class TestSubcontractingTransaction(FrappeTestCase):
-=======
-class TestSubcontractingTransaction(IntegrationTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -172,7 +165,6 @@ class TestSubcontractingTransaction(IntegrationTestCase):
         make_subcontracted_items()
         make_boms()
 
->>>>>>> 9569a5e4 (test: validate when gstin field is empty)
     def _create_stock_entry(self, doc_args):
         """Generate Stock Entry to test e-Waybill functionalities"""
         doc_args.update({"doctype": "Stock Entry"})
