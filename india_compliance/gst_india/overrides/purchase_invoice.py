@@ -270,6 +270,7 @@ def validate_reverse_charge(doc):
 
 
 def validate_hsn_codes(doc):
+    # To determine whether BOE is applicable or not.
     if doc.gst_category != "Overseas":
         return
 
