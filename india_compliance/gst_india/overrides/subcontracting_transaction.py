@@ -244,10 +244,15 @@ def validate_doc_references(doc):
 
 def validate_transaction(doc, method=None):
     if doc.doctype == "Stock Entry":
-        company_gstin_field = "bill_from_gstin"
-        party_gstin_field = "bill_to_gstin"
         company_address_field = "bill_from_address"
-        gst_category_field = "bill_to_gst_category"
+        if not doc.is_return:
+            company_gstin_field = "bill_from_gstin"
+            party_gstin_field = "bill_to_gstin"
+            gst_category_field = "bill_to_gst_category"
+        else:
+            company_gstin_field = "bill_to_gstin"
+            party_gstin_field = "bill_from_gstin"
+            gst_category_field = "bill_from_gst_category"
     else:
         company_gstin_field = "company_gstin"
         party_gstin_field = "supplier_gstin"
