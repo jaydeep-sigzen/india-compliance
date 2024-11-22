@@ -58,8 +58,6 @@ class TestPurchaseInvoice(FrappeTestCase):
             "Reverse Charge is not applicable on Import of Goods",
             pinv.save,
         )
-<<<<<<< HEAD
-=======
 
     def test_validate_invoice_length(self):
         # No error for registered supplier
@@ -86,4 +84,3 @@ class TestPurchaseInvoice(FrappeTestCase):
             "Transaction Name must be 16 characters or fewer to meet GST requirements",
             pinv.save,
         )
->>>>>>> 4b633889 (refactor: update error message and title to be more generic (#2763))
