@@ -58,3 +58,32 @@ class TestPurchaseInvoice(FrappeTestCase):
             "Reverse Charge is not applicable on Import of Goods",
             pinv.save,
         )
+<<<<<<< HEAD
+=======
+
+    def test_validate_invoice_length(self):
+        # No error for registered supplier
+        pinv = create_purchase_invoice(
+            supplier="_Test Registered Supplier",
+            is_reverse_charge=True,
+            do_not_save=True,
+        )
+        setattr(pinv, "__newname", "INV/2022/00001/asdfsadf")  # NOQA
+        pinv.meta.autoname = "prompt"
+        pinv.save()
+
+        # Error for unregistered supplier
+        pinv = create_purchase_invoice(
+            supplier="_Test Unregistered Supplier",
+            is_reverse_charge=True,
+            do_not_save=True,
+        )
+        setattr(pinv, "__newname", "INV/2022/00001/asdfsadg")  # NOQA
+        pinv.meta.autoname = "prompt"
+
+        self.assertRaisesRegex(
+            frappe.exceptions.ValidationError,
+            "Transaction Name must be 16 characters or fewer to meet GST requirements",
+            pinv.save,
+        )
+>>>>>>> 4b633889 (refactor: update error message and title to be more generic (#2763))
