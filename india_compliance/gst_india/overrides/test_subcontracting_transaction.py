@@ -1,11 +1,7 @@
 import re
 
 import frappe
-<<<<<<< HEAD
-from frappe.tests.utils import FrappeTestCase, change_settings
-=======
-from frappe.tests import IntegrationTestCase
->>>>>>> f10e5595 (test: additional tests recommendation for sub contracting order (#2783))
+from frappe.tests.utils import FrappeTestCase
 from erpnext.controllers.subcontracting_controller import (
     get_materials_from_supplier,
     make_rm_stock_entry,
@@ -151,9 +147,6 @@ def make_stock_transfer_entry(**args):
     return doc.submit()
 
 
-<<<<<<< HEAD
-class TestSubcontractingTransaction(FrappeTestCase):
-=======
 def make_stock_entry(**args):
     items = [
         {
@@ -186,8 +179,7 @@ SERVICE_ITEM = {
 }
 
 
-class TestSubcontractingTransaction(IntegrationTestCase):
->>>>>>> f10e5595 (test: additional tests recommendation for sub contracting order (#2783))
+class TestSubcontractingTransaction(FrappeTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
