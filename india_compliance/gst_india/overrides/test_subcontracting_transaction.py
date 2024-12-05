@@ -298,7 +298,9 @@ class TestSubcontractingTransaction(FrappeTestCase):
 
         self.assertRaisesRegex(
             frappe.ValidationError,
-            re.compile(r"(.*GST Category is a mandatory field for GST Transactions.*)"),
+            re.compile(
+                r"(.*Please ensure that it is set in the Party and / or Address.*)"
+            ),
             se.save,
         )
 
@@ -322,6 +324,7 @@ class TestSubcontractingTransaction(FrappeTestCase):
         return_se = get_materials_from_supplier(
             sco.name, [d.name for d in sco.supplied_items]
         )
+        return_se.supplier = "_Test Registered Supplier"
         return_se.save()
 
         scr = make_subcontracting_receipt(sco.name)
