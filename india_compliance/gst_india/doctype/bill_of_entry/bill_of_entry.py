@@ -11,7 +11,7 @@ from frappe.utils import today
 import erpnext
 from erpnext.accounts.general_ledger import make_gl_entries, make_reverse_gl_entries
 from erpnext.controllers.accounts_controller import AccountsController
-from erpnext.stock.get_item_details import ItemDetailsCtx, _get_item_tax_template
+from erpnext.stock.get_item_details import _get_item_tax_template
 
 from india_compliance.gst_india.overrides.ineligible_itc import (
     update_landed_cost_voucher_for_gst_expense,
@@ -240,15 +240,13 @@ class BillofEntry(Document):
         for item in self.items:
             if item.item_code and item.get("item_tax_template"):
                 item_doc = frappe.get_cached_doc("Item", item.item_code)
-                item_details = ItemDetailsCtx(
-                    {
-                        "net_rate": item.get("taxable_value"),
-                        "base_net_rate": item.get("taxable_value"),
-                        "tax_category": self.get("tax_category"),
-                        "bill_date": self.bill_of_entry_date,
-                        "company": self.get("company"),
-                    }
-                )
+                args = {
+                    "net_rate": item.get("taxable_value"),
+                    "base_net_rate": item.get("taxable_value"),
+                    "tax_category": self.get("tax_category"),
+                    "bill_date": self.bill_of_entry_date,
+                    "company": self.get("company"),
+                }
 
                 item_group = item_doc.item_group
                 item_group_taxes = []
@@ -265,7 +263,7 @@ class BillofEntry(Document):
                     continue
 
                 taxes = _get_item_tax_template(
-                    item_details, item_taxes + item_group_taxes, for_validate=True
+                    args, item_taxes + item_group_taxes, for_validate=True
                 )
 
                 if taxes:
